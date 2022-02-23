@@ -1,0 +1,20 @@
+{% extends 'stats/basic_page.html' %}
+{% load static %}
+
+{% block content %}
+<video autoplay muted loop id="myVideo">
+    <source src="{% static 'video/Homepage-Slide-One.webm' %}" type="video/webm">
+  </video>
+    <div class="container form-find">
+        
+        <form class="form_class"  method="post">
+            <img style="padding-bottom: 100px; height: 300px;" width="700px" src="{% static 'img/png.png' %}" alt="">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="p-2">{{field}}</div>    
+            {% endfor %}
+            <button type="submit">Find</button>
+            
+        </form>
+    </div>
+{% endblock %}
