@@ -1,0 +1,63 @@
+{% extends 'stats/basic_page.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="avatar-and-lvl">
+        <img class="profileIconId" src={{ profileIconId }}>
+        <span class="summonerLevel">{{ summonerLevel }}</span>
+        <h1 class="summonerName">{{ name }}</h1>
+    </div>
+    <div class="rankInfo">
+        <div class="div_rank_img">
+            <img class="summonerRankedIcon" src={{ ranked_icon }}>
+        </div>
+        <h1 class="rank">{{ rank }}</h1>
+        <h3 class="rank">{{ lp }}</h3>
+        <h5 class="rank"><span>Win:{{ wins }}</span> <span>Los:{{ losses }}</span></h1>
+    </div>
+    <div class="championMore">
+        <div class="title"><span>Champion</span><span>Lvl</span><span>Points</span></div>
+        <div class=" icons">
+            {% for ch_icon in champion_icon %}
+                        <img class="champion_icon" src={{ ch_icon }} alt="">     
+            {% endfor %}
+        </div>
+       
+        <div class="champ">
+             {% for k,v in finish_mastery_champions_for_user_hero_name %}
+                <h6>{{k}}</h6>
+            {% endfor %}
+        </div>
+        <div class="lvl">
+           {% for lvl in  finish_mastery_champions_for_user_lvl %}
+             <p>{{ lvl }}</p>
+           {% endfor %}
+        </div>
+        <div class="points">
+            {% for points in  finish_mastery_champions_for_user_points %}
+              <p>{{ points }}</p>
+            {% endfor %}
+         </div>
+    </div>
+    <div class="all_matches">
+        <ul class="list-group list_with_20_matches d-flex">
+            {% for item in global_info_sorted_1_user %}
+                {% for k,v in item.items %}
+                <li class="list-group-item">
+                    <img src={{ k }} alt="">
+                    {% for k,v in v.items %}
+                       {% if k == 'status' %}
+                           <h3 class="statusWinOrLose">{{ v }}</h3>
+                        {% else  %}
+                       
+                            <span class="kda_stats">{{ v }}</span>
+                       
+                       {% endif %}
+                    {% endfor %}
+                </li>
+                {% endfor %}
+            {% endfor %}
+          </ul>
+    </div>
+    
+{% endblock %}
